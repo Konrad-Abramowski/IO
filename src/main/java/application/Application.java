@@ -215,31 +215,33 @@ public class Application {
     }
 
     //-------- sendClicked
-//    public void sendClicked(Account senderAccount, int receiverAccount, String title, String address, float value) {
-//        // Sprawdzenie poprawności danych wprowadzonych w formularzu
-//        if (senderAccount == null) {
-//            showErrorMessage("Nie wybrano konta, z którego ma być wykonany przelew!");
-//            return;
-//        }
-//        if (!bankSystem.verifyReceiverAccount(receiverAccount)) {
-//            showErrorMessage("Bledny numer konta, na który ma być wykonany przelew!");
-//            return;
-//        }
-//        if (value <= 0) {
-//            showErrorMessage("Kwota przelewu nie może być mniejsza bądź równa 0!");
-//            return;
-//        }
-//
-//        Currency receiverCurrency = accounts.get(receiverAccount).getCurrency();
-//        String message;
-//        if (receiverCurrency == senderAccount.getCurrency()) {
-//            message = transaction(senderAccount, receiverAccount, title, address, value);
-//        } else {
-//            message = transaction(senderAccount, receiverAccount, title, address, value, receiverCurrency);
-//        }
-//
-//        showMessage(message);
-//    }
+    public void sendClicked(Account senderAccount, int receiverAccount, String title, String address, float value) {
+        // Sprawdzenie poprawności danych wprowadzonych w formularzu
+        if (senderAccount == null) {
+            showErrorMessage("Nie wybrano konta, z którego ma być wykonany przelew!");
+            return;
+        }
+        if (!bankSystem.verifyReceiverAccount(receiverAccount)) {
+            showErrorMessage("Bledny numer konta, na który ma być wykonany przelew!");
+            return;
+        }
+        if (value <= 0) {
+            showErrorMessage("Kwota przelewu nie może być mniejsza bądź równa 0!");
+            return;
+        }
+
+        Currency receiverCurrency = accounts.get(receiverAccount).getCurrency();
+        String message;
+        if (receiverCurrency == senderAccount.getCurrency()) {
+            message = bankSystem.transaction(senderAccount, receiverAccount, title, address, value);
+        } else {
+            message = bankSystem.transaction(senderAccount, receiverAccount, title, address, value, receiverCurrency);
+        }
+
+        showMessage(message);
+    }
+
+
 
     public void transaction() {
         login();
@@ -278,7 +280,7 @@ public class Application {
         System.out.print("Kwota\n>");
         float value = scanner.nextFloat();
 
-        //sendClicked(senderAccount, receiverAccount, title, address, value);
+        sendClicked(senderAccount, receiverAccount, title, address, value);
         mainMenu();
     }
 }

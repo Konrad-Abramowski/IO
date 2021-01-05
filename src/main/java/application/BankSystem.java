@@ -28,4 +28,12 @@ public class BankSystem {
     boolean verifyReceiverAccount(int receiverAccount) {
         return true;
     }
+
+    String transaction(Account senderAccount, int receiverAccount, String title, String address, float value) {
+        return "Ta sama waluta";
+    }
+
+    String transaction(Account senderAccount, int receiverAccount, String title, String address, float value, Currency receiverCurrency) {
+        return "Inna waluta";
+    }
 }
