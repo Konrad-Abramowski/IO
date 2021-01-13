@@ -245,7 +245,7 @@ public class Application {
 
         // w sendClicked jest pobranie danych z formularza transakcji, ale ciezko to zrobic tekstowo
         // Rozwiazanie dla testow -> przekazanie wartosci do sendClicked()
-        System.out.println("Transakcja: ");
+        System.out.println("-- Transakcja --");
         Scanner scanner = new Scanner(System.in);
         // Pobranie sender account
         Account senderAccount = new Account();

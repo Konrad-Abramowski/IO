@@ -72,7 +72,7 @@ public class BankSystem {
     }
 
     public boolean verifyReceiverAccount(int accountId){
-        if(accountId < 5){
+        if(accountId < 3){
             return true;
         }
         return false;
