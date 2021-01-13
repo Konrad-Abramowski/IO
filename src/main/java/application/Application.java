@@ -218,7 +218,7 @@ public class Application {
             showErrorMessage("Nie wybrano konta, z którego ma być wykonany przelew!");
             return;
         }
-        if (!client.getAccounts().contains(receiverAccount)) {
+        if (!bankSystem.verifyReceiverAccount(receiverAccount)) {
             showErrorMessage("Bledny numer konta, na który ma być wykonany przelew!");
             return;
         }
@@ -227,7 +227,7 @@ public class Application {
             return;
         }
 
-        Currency receiverCurrency = accounts.get(receiverAccount).getCurrency();
+        Currency receiverCurrency = bankSystem.getReceiverCurrency(receiverAccount);
         String message;
         if (receiverCurrency == senderAccount.getCurrency()) {
             message = bankSystem.transaction(senderAccount, receiverAccount, title, address, value);
@@ -262,10 +262,12 @@ public class Application {
                 senderAccount = tmp;
                 break;
             }
+
         }
         System.out.print("ID konta odbiorcy\n>");
         int receiverAccount = scanner.nextInt();
         System.out.print("Tytuł przelewu\n>");
+        String notUsed = scanner.nextLine();
         String title = scanner.nextLine();
         System.out.print("Adres\n>");
         String address = scanner.nextLine();

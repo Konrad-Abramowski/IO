@@ -61,10 +61,6 @@ public class BankSystem {
         return hashMap;
     }
 
-    boolean verifyReceiverAccount(int receiverAccount) {
-        return true;
-    }
-
     String transaction(Account senderAccount, int receiverAccount,
                        String title, String address, float value) {
         return "Ta sama waluta";
@@ -74,6 +70,22 @@ public class BankSystem {
                        String address, float value, Currency receiverCurrency) {
         return "Inna waluta";
     }
+
+    public boolean verifyReceiverAccount(int accountId){
+        if(accountId < 5){
+            return true;
+        }
+        return false;
+    }
+    public Currency getReceiverCurrency(int accountId){
+        if(accountId%3 == 0)
+            return Currency.Euro;
+        else if(accountId%3 == 1)
+            return Currency.Polski_zloty;
+        else
+            return Currency.US_Dollar;
+    }
+
 }
 
 
