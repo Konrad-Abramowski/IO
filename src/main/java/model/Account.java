@@ -46,4 +46,12 @@ public class Account {
     public void setTransferHistory(TransferHistory transferHistory) {
         this.transferHistory = transferHistory;
     }
+
+    public boolean sendMoney(float value){
+        if(value<=this.value){
+            this.value -= value;
+            return true;
+        }
+        return false;
+    }
 }

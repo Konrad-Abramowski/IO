@@ -49,4 +49,9 @@ public class Dane {
         return clients;
     }
 
+    public Account getAccount() {
+        Account account = new Account(5, 400, Currency.Polski_zloty);
+        return account;
+    }
+
 }

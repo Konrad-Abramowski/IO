@@ -63,12 +63,41 @@ public class BankSystem {
 
     String transaction(Account senderAccount, int receiverAccount,
                        String title, String address, float value) {
-        return "Ta sama waluta";
+        if(senderAccount.sendMoney(value))
+            return "Ta sama waluta, wykonano przelew";
+        else
+            return "Ta sama waluta, zbyt mała liczba środków na koncie";
     }
 
     String transaction(Account senderAccount, int receiverAccount, String title,
                        String address, float value, Currency receiverCurrency) {
-        return "Inna waluta";
+        if(senderAccount.sendMoney(value))
+            return "Inna waluta, wykonano przelew";
+        else
+            return "Inna waluta, zbyt mała liczba środków na koncie";
+    }
+
+    float getRatio(Currency senderCurrency, Currency receiverCurrency){
+        float ratio = 1.0f;
+        if(senderCurrency == Currency.Euro){
+            if(receiverCurrency == Currency.Polski_zloty)
+                ratio = 4.54f;
+            else
+                ratio = 1.22f;
+        }
+        else if (senderCurrency == Currency.Polski_zloty) {
+            if(receiverCurrency == Currency.Euro)
+                ratio = 0.22f;
+            else
+                ratio = 0.27f;
+        }
+        else {
+            if(receiverCurrency == Currency.Euro)
+                ratio = 0.82f;
+            else
+                ratio = 3.74f;
+        }
+        return ratio;
     }
 
     public boolean verifyReceiverAccount(int accountId){
