@@ -8,14 +8,14 @@ import java.util.*;
 
 public class Application {
 
-    private BankSystem bankSystem;
+    private static BankSystem bankSystem = new BankSystem();
+
     private Client client;
     private Employee employee;
-    private List<Employee> employees = new ArrayList<>();
-    private List<Client> clients = new ArrayList<>();
-    private List<Account> accounts = new ArrayList<>();
+    private ArrayList<Account> accounts = new ArrayList<>();
 
     public static void main(String[] args) {
+        bankSystem.insertData();
         Application app = new Application();
         app.mainMenu();
     }
@@ -59,9 +59,10 @@ public class Application {
             // Na potrzeby testów -> wpisanie tekstowo w konsoli
             System.out.println("Login: ");
             Scanner scanner = new Scanner(System.in);
-            String login = scanner.nextLine();
+            String login = scanner.next();
             System.out.println("Hasło: "); // Security 100%
-            String password = scanner.nextLine();
+            String password = scanner.next();
+            client = new Client();
             client = bankSystem.verifyLogin(login, password);
             if (client == null) {
                 showErrorMessage("Błędne dane logowania!");
@@ -69,8 +70,7 @@ public class Application {
             max_iterations--;
         }
         if (client != null) {
-            // Zmiana widoku na wymagany -> tekstowo  przelew badz historia transakcji
-            // Jakas metoda(?)
+            mainMenu();
         }
     }
 
@@ -92,14 +92,12 @@ public class Application {
             }
         }
         // Wywolanie loginClient
-        loginClient();
+        mainMenu();
         if (client == null) { // logowanie klienta nie powiodlo sie
             employee = null;
             login();
         }
 
-        // Zmiana widoku na wymagany -> tekstowo  przelew badz historia transakcji
-        // Jakas metoda(?)
     }
 
     //-------- showTransactionHistory
@@ -153,7 +151,7 @@ public class Application {
             a = scanner.nextInt();
         } while (true);
 
-        // Jakies wyjscie po nacisnieciu przycisku (?)
+        mainMenu();
     }
 
     //-------- monthlyBalanceClicked
@@ -203,7 +201,6 @@ public class Application {
     }
 
 
-
     //-------- showErrorMessage
     public static void showErrorMessage(String errorMessage) {
         System.out.println("ERROR: " + errorMessage);
@@ -221,7 +218,7 @@ public class Application {
             showErrorMessage("Nie wybrano konta, z którego ma być wykonany przelew!");
             return;
         }
-        if (!bankSystem.verifyReceiverAccount(receiverAccount)) {
+        if (!client.getAccounts().contains(receiverAccount)) {
             showErrorMessage("Bledny numer konta, na który ma być wykonany przelew!");
             return;
         }
@@ -242,21 +239,13 @@ public class Application {
     }
 
 
-
     public void transaction() {
         login();
         int clientID = client.getId();
 
-        // Wyswietlenie formularza transakcji
-        // senderAccount: Account
-        // receiverAccount -> tylko ID : int
-        // title : String
-        // address : String
-        // value : float
-
         // w sendClicked jest pobranie danych z formularza transakcji, ale ciezko to zrobic tekstowo
         // Rozwiazanie dla testow -> przekazanie wartosci do sendClicked()
-
+        System.out.println("Transakcja: ");
         Scanner scanner = new Scanner(System.in);
         // Pobranie sender account
         Account senderAccount = new Account();
@@ -265,11 +254,14 @@ public class Application {
         while (it.hasNext()) {
             tmp = it.next(); // Pobranie wartosci
             // Spytanie czy to ma byc to konto
-            System.out.print("ID: " + tmp.getId() + "\nŚrodki: " + tmp.getValue() + "\nWaluta: " + tmp.getCurrency() + "\n");
+            System.out.print("ID: " + tmp.getId() + "\nŚrodki: " + tmp.getValue() + "\nWaluta: " +
+                    tmp.getCurrency() + "\n");
             System.out.print("Czy wybierasz to konto?: [tak/nie]\n>");
             String answer = scanner.nextLine();
-            if (answer == "tak")
+            if (answer.compareTo("tak")==0 ) {
                 senderAccount = tmp;
+                break;
+            }
         }
         System.out.print("ID konta odbiorcy\n>");
         int receiverAccount = scanner.nextInt();
@@ -284,3 +276,5 @@ public class Application {
         mainMenu();
     }
 }
+
+

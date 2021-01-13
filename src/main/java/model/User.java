@@ -5,7 +5,7 @@ public class User {
     protected int id;
     protected Address address;
     protected String firstName;
-    protected String lasName;
+    protected String lastName;
     protected String login;
     protected String password;
     protected String emailAddress;
@@ -34,12 +34,12 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getLasName() {
-        return lasName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLasName(String lasName) {
-        this.lasName = lasName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getLogin() {

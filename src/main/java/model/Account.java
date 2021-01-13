@@ -6,6 +6,15 @@ public class Account {
     private Currency currency;
     private TransferHistory transferHistory;
 
+    public Account() {
+    }
+
+    public Account(int id, float value, Currency currency) {
+        this.id = id;
+        this.value = value;
+        this.currency = currency;
+    }
+
     public int getId() {
         return id;
     }
