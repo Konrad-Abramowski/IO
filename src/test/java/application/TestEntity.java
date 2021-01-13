@@ -1,4 +1,4 @@
 package application;
 
-class BankSystemTests {
+interface TestEntity {
 }
