@@ -63,10 +63,14 @@ public class BankSystem {
 
     String transaction(Account senderAccount, int receiverAccount,
                        String title, String address, float value) {
+        Currency receiverCurrency = getReceiverCurrency(receiverAccount);
         if(senderAccount.sendMoney(value))
-            return "Ta sama waluta, wykonano przelew";
+            if(senderAccount.getCurrency().equals(receiverCurrency))
+                return "Ta sama waluta, wykonano przelew";
+            else
+                return "Inna waluta, wykonano przelew";
         else
-            return "Ta sama waluta, zbyt mała liczba środków na koncie";
+            return "Zbyt mała liczba środków na koncie";
     }
 
     String transaction(Account senderAccount, int receiverAccount, String title,

@@ -228,12 +228,12 @@ public class Application {
         }
 
         Currency receiverCurrency = bankSystem.getReceiverCurrency(receiverAccount);
-        String message;
-        if (receiverCurrency == senderAccount.getCurrency()) {
+        String message = bankSystem.transaction(senderAccount, receiverAccount, title, address, value);
+/*        if (receiverCurrency == senderAccount.getCurrency()) {
             message = bankSystem.transaction(senderAccount, receiverAccount, title, address, value);
         } else {
             message = bankSystem.transaction(senderAccount, receiverAccount, title, address, value, receiverCurrency);
-        }
+        }*/
 
         showMessage(message);
     }
