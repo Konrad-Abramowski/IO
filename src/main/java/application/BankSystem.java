@@ -64,8 +64,8 @@ public class BankSystem {
     String transaction(Account senderAccount, int receiverAccount,
                        String title, String address, float value) {
         Currency receiverCurrency = getReceiverCurrency(receiverAccount);
-        if(senderAccount.sendMoney(value))
-            if(senderAccount.getCurrency().equals(receiverCurrency))
+        if (senderAccount.sendMoney(value))
+            if (senderAccount.getCurrency().equals(receiverCurrency))
                 return "Ta sama waluta, wykonano przelew";
             else
                 return "Inna waluta, wykonano przelew";
@@ -81,22 +81,22 @@ public class BankSystem {
             return "Inna waluta, zbyt mała liczba środków na koncie";
     }*/
 
-    float getRatio(Currency senderCurrency, Currency receiverCurrency){
+    float getCurrencyExchangeRate(Currency senderCurrency, Currency receiverCurrency) {
         float ratio = 1.0f;
-        if(senderCurrency == Currency.Euro){
-            if(receiverCurrency == Currency.Polski_zloty)
+        if (senderCurrency == receiverCurrency) {
+            ratio = 1.0f;
+        } else if (senderCurrency == Currency.Euro) {
+            if (receiverCurrency == Currency.Polski_zloty)
                 ratio = 4.54f;
             else
                 ratio = 1.22f;
-        }
-        else if (senderCurrency == Currency.Polski_zloty) {
-            if(receiverCurrency == Currency.Euro)
+        } else if (senderCurrency == Currency.Polski_zloty) {
+            if (receiverCurrency == Currency.Euro)
                 ratio = 0.22f;
             else
                 ratio = 0.27f;
-        }
-        else {
-            if(receiverCurrency == Currency.Euro)
+        } else {
+            if (receiverCurrency == Currency.Euro)
                 ratio = 0.82f;
             else
                 ratio = 3.74f;
@@ -104,16 +104,17 @@ public class BankSystem {
         return ratio;
     }
 
-    public boolean verifyReceiverAccount(int accountId){
-        if(accountId < 3){
+    public boolean verifyReceiverAccount(int accountId) {
+        if (accountId < 3) {
             return true;
         }
         return false;
     }
-    public Currency getReceiverCurrency(int accountId){
-        if(accountId%3 == 0)
+
+    public Currency getReceiverCurrency(int accountId) {
+        if (accountId % 3 == 0)
             return Currency.Euro;
-        else if(accountId%3 == 1)
+        else if (accountId % 3 == 1)
             return Currency.Polski_zloty;
         else
             return Currency.US_Dollar;
