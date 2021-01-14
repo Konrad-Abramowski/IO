@@ -250,7 +250,7 @@ public class Application {
         // Pobranie sender account
         Account senderAccount = new Account();
         Iterator<Account> it = client.getAccounts().iterator();
-        Account tmp;
+        Account tmp = new Account();
         while (it.hasNext()) {
             tmp = it.next(); // Pobranie wartosci
             // Spytanie czy to ma byc to konto
@@ -264,6 +264,11 @@ public class Application {
             }
 
         }
+        if(!senderAccount.equals(tmp)){
+            showErrorMessage("Nie wybrano żadnego konta!");
+            mainMenu();
+        }
+
         System.out.print("ID konta odbiorcy\n>");
         int receiverAccount = scanner.nextInt();
         System.out.print("Tytuł przelewu\n>");

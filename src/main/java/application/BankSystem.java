@@ -73,13 +73,13 @@ public class BankSystem {
             return "Zbyt mała liczba środków na koncie";
     }
 
-    String transaction(Account senderAccount, int receiverAccount, String title,
+  /*  String transaction(Account senderAccount, int receiverAccount, String title,
                        String address, float value, Currency receiverCurrency) {
         if(senderAccount.sendMoney(value))
             return "Inna waluta, wykonano przelew";
         else
             return "Inna waluta, zbyt mała liczba środków na koncie";
-    }
+    }*/
 
     float getRatio(Currency senderCurrency, Currency receiverCurrency){
         float ratio = 1.0f;
