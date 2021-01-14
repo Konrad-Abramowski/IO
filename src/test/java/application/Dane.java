@@ -4,9 +4,7 @@ import model.Account;
 import model.Client;
 import model.Currency;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class Dane {
 
@@ -52,6 +50,21 @@ public class Dane {
     public Account getAccount() {
         Account account = new Account(5, 400, Currency.Polski_zloty);
         return account;
+    }
+
+    public Map<Integer, Currency> getIdToCurrencyMap(){
+        Map<Integer, Currency> map = new HashMap<Integer, Currency>();
+
+        map.put(0, Currency.Euro);
+        map.put(1, Currency.Polski_zloty);
+        map.put(2, Currency.US_Dollar);
+        map.put(3, Currency.Euro);
+        map.put(4, Currency.Polski_zloty);
+        map.put(5, Currency.US_Dollar);
+        map.put(6, Currency.Euro);
+        map.put(7, Currency.Polski_zloty);
+        map.put(8, Currency.US_Dollar);
+        return map;
     }
 
 }
