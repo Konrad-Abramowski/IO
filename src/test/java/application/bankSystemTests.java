@@ -18,7 +18,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-@Category({TestEntity.class})
+@Category({TestEntity.class, TestControl.class})
 @RunWith(Parameterized.class)
 public class bankSystemTests {
     Dane dane = new Dane();
