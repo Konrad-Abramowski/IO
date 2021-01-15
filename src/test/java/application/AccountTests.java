@@ -39,5 +39,4 @@ public class AccountTests {
         assertTrue(account.getValue()==(finalBalance));
     }
 
-    // Testowanie setterow/getterow jest chyba bez sensu
 }
